@@ -22,9 +22,9 @@ CArc::~CArc()
 	delete pSOMARCDestination;
 }
 
-CArc & CArc::operator=(const CArc & ARCParam)
+CArc & CArc::operator=(CArc & ARCParam)
 {
-	pSOMARCDestination = new CSommet(ARCParam);
+	pSOMARCDestination = new CSommet(*(ARCParam.ARCLiredest()));
 }
 
 void CArc::ARCAffecterDest(CSommet * pSOMSommet)

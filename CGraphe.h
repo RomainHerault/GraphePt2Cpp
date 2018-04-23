@@ -12,7 +12,7 @@ class CGraphe
 
 private : 
 	unsigned int uiGRANbSommet;
-	vector<CSommet> vSOMGRASommet;
+	vector<CSommet> * pvSOMGRASommet;
 
 public:
 	/**Constructor par défaut
@@ -35,7 +35,7 @@ public:
 	*
 	*Entraine : (L'objet est correctement initialisé comme une copie du paramètre)
 	*/
-	CGraphe(CGraphe & GRAParam);
+	CGraphe(const CGraphe & GRAParam);
 
 	/**
 	*E:Destructeur par défaut

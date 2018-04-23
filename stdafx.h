@@ -6,10 +6,10 @@
 #pragma once
 
 #include "targetver.h"
-
+/*
 #include <stdio.h>
 #include <tchar.h>
 
-
+*/
 
 // TODO: faites référence ici aux en-têtes supplémentaires nécessaires au programme

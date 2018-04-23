@@ -12,6 +12,9 @@
 */
 CGraphe::CGraphe()
 {
+	uiGRANbSommet = 0;
+	pvSOMGRASommet = new vector<CSommet>;
+
 }
 
 /** Constructeur de recopie
@@ -23,8 +26,10 @@ CGraphe::CGraphe()
 *
 *Entraine : (L'objet est correctement initialisé comme une copie du paramètre)
 */
-CGraphe::CGraphe(CGraphe & GRAParam)
+CGraphe::CGraphe(const CGraphe & GRAParam)
 {
+	uiGRANbSommet = GRAParam.uiGRANbSommet;
+	pvSOMGRASommet = new vector<CSommet>(*(GRAParam.pvSOMGRASommet));
 }
 
 /**
