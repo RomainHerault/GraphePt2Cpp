@@ -1,7 +1,2 @@
-﻿  CLoad.cpp
-c:\users\romain\onedrive\documents\cours polytech 3a\semestre 2\projet c++ pt 2\projet-cplusplus-partie2\graphe\graphe\cload.cpp(48): warning C4018: '<' : incompatibilité signed/unsigned
-c:\users\romain\onedrive\documents\cours polytech 3a\semestre 2\projet c++ pt 2\projet-cplusplus-partie2\graphe\graphe\cload.cpp(64): warning C4018: '<' : incompatibilité signed/unsigned
-  Graphe.cpp
-  Génération de code en cours...
-CLoad.obj : error LNK2001: symbole externe non résolu "private: static class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > CLoad::sLODNomFichier" (?sLODNomFichier@CLoad@@0V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A)
+﻿CLoad.obj : error LNK2001: symbole externe non résolu "private: static class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > CLoad::sLODNomFichier" (?sLODNomFichier@CLoad@@0V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A)
 C:\Users\Romain\OneDrive\Documents\Cours Polytech 3A\Semestre 2\Projet C++ pt 2\Projet-cplusplus-partie2\Graphe\x64\Debug\Graphe.exe : fatal error LNK1120: 1 externes non résolus
