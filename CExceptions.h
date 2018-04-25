@@ -5,11 +5,13 @@
 
 
 
-#define POINTEUR_NULL   1
-#define TAB_DEPPASSE    2
-#define DIV_PAR_0       3
-#define BAD_SIZE_OF_MAT 4
-#define WRONG_TYPE      5
+#define POINTEUR_NULL		1
+#define TAB_DEPPASSE		2
+#define DIV_PAR_0			3
+#define BAD_SIZE_OF_MAT		4
+#define WRONG_TYPE			5
+#define BAD_INPUT			6
+#define OBJECT_DOESNT_EXIST	7
 
 #include <string>
 #include <vector>

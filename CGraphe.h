@@ -11,7 +11,7 @@ using namespace std;
 class CGraphe
 {
 
-private : 
+private:
 	unsigned int uiGRANbSommet;
 	vector<CSommet> * pvSOMGRASommet;
 
@@ -58,7 +58,7 @@ public:
 	*
 	*Entraine :(L'objet devient une copie du paramètre)
 	*/
-	void operator=(CGraphe GRAParam);
+	void operator=(CGraphe & GRAParam);
 
 	/** Ajoute un sommet au graphe
 	*E:
@@ -69,10 +69,10 @@ public:
 	*
 	*Entraine :(Le sommet est ajouté au graphe)
 	*/
-	void GRAAffecterSom(CSommet SOMSommet);
+	void GRAAffecterSom(CSommet * SOMSommet);
 
 	/** Permet de récupérer les sommet du graphe
-	*E: 
+	*E:
 	*
 	*Necessite :
 	*

@@ -2,13 +2,19 @@
 #ifndef C_LOAD_H
 #define C_LOAD_H
 #include "CGraphe.h"
+#include "CExceptions.h"
+#include <string>
+#include <iostream>
+#include <assert.h>
+#include <fstream>
+
 
 class CLoad
 {
 
 private : 
-	CGraphe pGRALODGraphe;
-	string sLODNomFichier;
+
+	static string sLODNomFichier;
 
 public:
 	/** Ajoute le fichier 
@@ -31,6 +37,6 @@ public:
 	*
 	*Entraine :(Le graphe correspondant au contenu du fichier est créé)
 	*/
-	CGraphe static LODParser();
+	CGraphe static  * LODParser();
 };
 #endif

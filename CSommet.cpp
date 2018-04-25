@@ -42,6 +42,11 @@ void CSommet::operator=(CSommet * SOMParam)
 		vARCSOMPartant->push_back(*(new CArc(SOMParam->vARCSOMPartant->at(uiCompteur))));
 }
 
+int CSommet::SOMLireNumero()
+{
+	return uiSOMNumero;
+}
+
 void CSommet::SOMAffecterArcArrivant(CArc * ARCArc)
 {
 	vARCSOMArrivant->push_back(*(new CArc(*ARCArc)));

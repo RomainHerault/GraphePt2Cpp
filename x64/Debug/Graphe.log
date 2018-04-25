@@ -1,7 +1,3 @@
-﻿  CArc.cpp
-  CGraphe.cpp
-  CLoad.cpp
-  CSommet.cpp
-  Génération de code en cours...
-c:\users\romain\onedrive\documents\cours polytech 3a\semestre 2\projet c++ pt 2\projet-cplusplus-partie2\graphe\graphe\cload.cpp(31): error C4716: 'CLoad::LODParser' : doit retourner une valeur
-c:\users\romain\onedrive\documents\cours polytech 3a\semestre 2\projet c++ pt 2\projet-cplusplus-partie2\graphe\graphe\cgraphe.cpp(88): error C4716: 'CGraphe::GRALireSommets' : doit retourner une valeur
+﻿  Graphe.cpp
+CLoad.obj : error LNK2001: symbole externe non résolu "private: static class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > CLoad::sLODNomFichier" (?sLODNomFichier@CLoad@@0V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A)
+C:\Users\Romain\OneDrive\Documents\Cours Polytech 3A\Semestre 2\Projet C++ pt 2\Projet-cplusplus-partie2\Graphe\x64\Debug\Graphe.exe : fatal error LNK1120: 1 externes non résolus

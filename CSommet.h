@@ -20,6 +20,7 @@ public:
 	CSommet(const CSommet & SOMParam);
 	~CSommet();
 	void operator=(CSommet * SOMParam);
+	int SOMLireNumero();
 	void SOMAffecterArcArrivant(CArc * ARCArc);
 	void SOMSupprimerArcArrivant(CArc * ARCArc);
 	vector<CArc> * SOMLireArcArrivant();
@@ -27,5 +28,6 @@ public:
 	void SOMSupprimerArcPartant(CArc * ARCArc);
 	vector<CArc> * SOMLireArcPartant();
 };
+
 
 #endif

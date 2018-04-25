@@ -43,6 +43,7 @@ CGraphe::CGraphe(const CGraphe & GRAParam)
 */
 CGraphe::~CGraphe()
 {
+	delete pvSOMGRASommet;
 }
 
 /** Surcharge de l'opérateur =
@@ -54,9 +55,10 @@ CGraphe::~CGraphe()
 *
 *Entraine :(L'objet devient une copie du paramètre)
 */
-void CGraphe::operator=(CGraphe GRAParam)
+void CGraphe::operator=(CGraphe & GRAParam)
 {
-
+	uiGRANbSommet = GRAParam.uiGRANbSommet;
+	pvSOMGRASommet = new vector<CSommet>(*GRAParam.pvSOMGRASommet);
 }
 
 /** Ajoute un sommet au graphe
@@ -68,9 +70,9 @@ void CGraphe::operator=(CGraphe GRAParam)
 *
 *Entraine :(Le sommet est ajouté au graphe)
 */
-void CGraphe::GRAAffecterSom(CSommet SOMSommet)
+void CGraphe::GRAAffecterSom(CSommet * SOMSommet)
 {
-
+	pvSOMGRASommet->push_back(*SOMSommet);
 }
 
 /** Permet de récupérer les sommet du graphe
@@ -84,7 +86,7 @@ void CGraphe::GRAAffecterSom(CSommet SOMSommet)
 */
 vector<CSommet> CGraphe::GRALireSommets()
 {
-
+	return *(new vector<CSommet>());
 }
 
 /** Afficher le graphe
@@ -98,5 +100,9 @@ vector<CSommet> CGraphe::GRALireSommets()
 */
 void CGraphe::GRAAfficher()
 {
-
+	for (CSommet SOMSommet : *pvSOMGRASommet)
+	{
+		for (CArc ARCArc : *SOMSommet.SOMLireArcPartant())
+			printf("Le sommet %d va vers le sommet %d", SOMSommet.SOMLireNumero(), ARCArc.ARCLiredest()->SOMLireNumero());
+	}
 }
