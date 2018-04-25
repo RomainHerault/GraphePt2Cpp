@@ -27,11 +27,11 @@
     <ClInclude Include="CExceptions.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="CGraphe.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="CLoad.h">
       <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="CGraphe.h">
+      <Filter>Fichiers sources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

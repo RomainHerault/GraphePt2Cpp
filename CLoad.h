@@ -14,7 +14,7 @@ class CLoad
 
 private : 
 
-	static string sLODNomFichier;
+	string static sLODNomFichier;
 
 public:
 	/** Ajoute le fichier 

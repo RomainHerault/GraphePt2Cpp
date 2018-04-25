@@ -86,10 +86,7 @@ CGraphe * CLoad::LODParser()
 			CArc * ARCArc = new CArc(pSOMDest);
 
 			pSOMDest->SOMAffecterArcArrivant(ARCArc);
-
 			pSOMDep->SOMAffecterArcPartant(ARCArc);
-
-
 		}
 	}
 	else
