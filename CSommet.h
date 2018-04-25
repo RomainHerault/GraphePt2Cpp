@@ -1,7 +1,11 @@
 #pragma once
+
+#ifndef CSOMMET_H
+#define CSOMMET_H
 #include <vector>
 #include "CArc.h"
 
+class CArc;
 using namespace std;
 
 class CSommet
@@ -24,3 +28,4 @@ public:
 	vector<CArc> * SOMLireArcPartant();
 };
 
+#endif

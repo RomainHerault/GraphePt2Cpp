@@ -1,4 +1,4 @@
-#include "stdafx.h"
+
 #include "CArc.h"
 
 
@@ -22,7 +22,7 @@ CArc::~CArc()
 	delete pSOMARCDestination;
 }
 
-CArc & CArc::operator=(CArc & ARCParam)
+void CArc::operator=(CArc & ARCParam)
 {
 	pSOMARCDestination = new CSommet(*(ARCParam.ARCLiredest()));
 }

@@ -1,6 +1,9 @@
 
-#ifndef CEXCEPTIONS_H
-#define CEXCEPTIONS_H
+#pragma once
+#ifndef CEXCEPTION_H
+#define CEXCEPTION_H
+
+
 
 #define POINTEUR_NULL   1
 #define TAB_DEPPASSE    2

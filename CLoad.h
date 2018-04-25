@@ -1,5 +1,6 @@
 #pragma once
-
+#ifndef C_LOAD_H
+#define C_LOAD_H
 #include "CGraphe.h"
 
 class CLoad
@@ -32,4 +33,4 @@ public:
 	*/
 	CGraphe static LODParser();
 };
-
+#endif

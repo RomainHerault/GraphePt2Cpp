@@ -1,6 +1,5 @@
 #include <vector>
 
-#include "stdafx.h"
 #include "CSommet.h"
 
 using namespace std;

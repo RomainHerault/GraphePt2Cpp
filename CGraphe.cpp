@@ -1,4 +1,4 @@
-#include "stdafx.h"
+
 #include "CGraphe.h"
 
 /**Constructor par défaut

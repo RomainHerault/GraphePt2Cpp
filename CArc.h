@@ -1,6 +1,9 @@
 #pragma once
+#ifndef CARC_H
+#define CARC_H
 
-#include "CSommet.h"
+#include"CSommet.h"
+class CSommet;
 
 /**
 * \brief contient le sommet vers lequel l'arc se dirige
@@ -58,7 +61,7 @@ public:
 	* \param ARCParam CArc : Objet contenant les valeurs à recopier
 	* \return CArc :
 	*/
-	CArc & operator=(CArc & ARCParam);
+	void operator=(CArc & ARCParam);
 
 	/**
 	* \brief Affecter un CSommet a la variable SOMARCDestination
@@ -78,3 +81,4 @@ public:
 	CSommet * ARCLiredest();
 };
 
+#endif

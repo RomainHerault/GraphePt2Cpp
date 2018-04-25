@@ -1,1 +1,7 @@
-﻿D:\Logiciels\VisualStudio\Common7\IDE\VC\VCTargets\Platforms\x64\PlatformToolsets\v141\Toolset.targets(36,5): error MSB8036: le SDK Windows version 10.0.15063.0 est introuvable. Installez la version nécessaire du SDK Windows, ou changez la version du SDK dans les pages de propriétés du projet. Vous pouvez également cliquer avec le bouton droit sur la solution, et sélectionner "Recibler la solution".
+﻿  CArc.cpp
+  CGraphe.cpp
+  CLoad.cpp
+  CSommet.cpp
+  Génération de code en cours...
+c:\users\romain\onedrive\documents\cours polytech 3a\semestre 2\projet c++ pt 2\projet-cplusplus-partie2\graphe\graphe\cload.cpp(31): error C4716: 'CLoad::LODParser' : doit retourner une valeur
+c:\users\romain\onedrive\documents\cours polytech 3a\semestre 2\projet c++ pt 2\projet-cplusplus-partie2\graphe\graphe\cgraphe.cpp(88): error C4716: 'CGraphe::GRALireSommets' : doit retourner une valeur

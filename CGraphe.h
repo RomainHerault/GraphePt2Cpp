@@ -1,5 +1,6 @@
 #pragma once
-
+#ifndef CGRAPHE_H
+#define CGRAPHE_H
 
 #include <vector>
 #include "CSommet.h"
@@ -91,10 +92,6 @@ public:
 	*Entraine :(Le graphe est affiché)
 	*/
 	void GRAAfficher();
-
-
-
-
-
 };
 
+#endif 
