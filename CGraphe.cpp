@@ -12,7 +12,7 @@
 */
 CGraphe::CGraphe()
 {
-	uiGRANbSommet = 0;
+	
 	pvSOMGRASommet = new vector<CSommet>;
 
 }
@@ -28,7 +28,7 @@ CGraphe::CGraphe()
 */
 CGraphe::CGraphe(const CGraphe & GRAParam)
 {
-	uiGRANbSommet = GRAParam.uiGRANbSommet;
+	
 	pvSOMGRASommet = new vector<CSommet>(*(GRAParam.pvSOMGRASommet));
 }
 
@@ -57,7 +57,7 @@ CGraphe::~CGraphe()
 */
 void CGraphe::operator=(CGraphe & GRAParam)
 {
-	uiGRANbSommet = GRAParam.uiGRANbSommet;
+	
 	pvSOMGRASommet = new vector<CSommet>(*GRAParam.pvSOMGRASommet);
 }
 
@@ -84,10 +84,10 @@ void CGraphe::GRAAffecterSom(CSommet * SOMSommet)
 * vector<CSommet> une vecteur contenant tous les sommets du graphe
 *Entraine :(Retourne un vecteur contenant les sommets du graphe)
 */
-vector<CSommet> CGraphe::GRALireSommets()
+vector<CSommet> * CGraphe::GRALireSommets()
 {
 
-	return * pvSOMGRASommet;
+	return pvSOMGRASommet;
 }
 
 /** Afficher le graphe
@@ -101,9 +101,21 @@ vector<CSommet> CGraphe::GRALireSommets()
 */
 void CGraphe::GRAAfficher()
 {
+	vector<CArc> vListeArc;
 	for (CSommet SOMSommet : *pvSOMGRASommet)
 	{
-		for (CArc ARCArc : * (SOMSommet.SOMLireArcPartant()))
-			printf("Le sommet %d va vers le sommet %d", SOMSommet.SOMLireNumero(), ARCArc.ARCLiredest()->SOMLireNumero());
+		vListeArc = *(SOMSommet.SOMLireArcPartant());
+		for (unsigned int uiBoucle = 0; uiBoucle < vListeArc.size(); uiBoucle++  /*CArc ARCArc : * (SOMSommet.SOMLireArcPartant())*/)
+			printf("Le sommet %d va vers le sommet %d\n", SOMSommet.SOMLireNumero(), vListeArc.at(uiBoucle).ARCLiredest()->SOMLireNumero());
 	}
+}
+
+CSommet * CGraphe::GRATrouverParNum(unsigned int uiNum)
+{
+	for (unsigned int uiBoucle = 0; uiBoucle < pvSOMGRASommet->size(); uiBoucle++)
+	{
+		if (pvSOMGRASommet->at(uiBoucle).SOMLireNumero() == uiNum)
+			return &pvSOMGRASommet->at(uiBoucle);
+	}
+	throw new CExceptions(OBJECT_DOESNT_EXIST);
 }

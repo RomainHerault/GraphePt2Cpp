@@ -19,7 +19,7 @@ CArc::CArc(const CArc & ARCParam)
 
 CArc::~CArc()
 {
-	delete pSOMARCDestination;
+	pSOMARCDestination = 0;
 }
 
 void CArc::operator=(CArc & ARCParam)

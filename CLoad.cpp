@@ -44,7 +44,7 @@ CGraphe * CLoad::LODParser()
 	//lecture des sommets
 	if (sData.compare(0, 100, "Sommets=[") == 0)
 	{
-		for (int uiSom = 0; uiSom < uiNbSom; uiSom++)
+		for (unsigned int uiSom = 0; uiSom < uiNbSom; uiSom++)
 		{
 			infile >> sData;
 			unsigned int uiNumSom = atoi(sData.c_str());
@@ -61,7 +61,7 @@ CGraphe * CLoad::LODParser()
 	{
 		CSommet * pSOMDest = 0;
 		CSommet * pSOMDep = 0;
-		CArc * ARCArc = 0;
+		CArc * pARCArc = 0;
 		for (unsigned int uiArc = 0; uiArc < uiNbArcs; uiArc++)
 		{
 			infile >> sData;
@@ -71,31 +71,37 @@ CGraphe * CLoad::LODParser()
 			infile >> sData;
 			unsigned int uiSomArr = atoi(sData.c_str());
 
-			for (CSommet SOMSom : pGRAgraphe->GRALireSommets())
+			vector<CSommet> * vListeSommet =  pGRAgraphe->GRALireSommets();
+
+			for (unsigned int uiBoucle = 0; uiBoucle < vListeSommet->size(); uiBoucle++    /*CSommet SOMSom : pGRAgraphe->GRALireSommets()*/)
 			{
-				if (SOMSom.SOMLireNumero() == uiSomDep)
+				if (vListeSommet->at(uiBoucle).SOMLireNumero() == uiSomDep)
 				{
-					pSOMDep = new CSommet(SOMSom);
+					pSOMDep = &vListeSommet->at(uiBoucle);
 				}
 				//else
 				//	throw new CExceptions(OBJECT_DOESNT_EXIST);
-			}
-			for (CSommet SOMSom : pGRAgraphe->GRALireSommets())
-			{
-				if (SOMSom.SOMLireNumero() == uiSomArr)
+			
+			
+				if (vListeSommet->at(uiBoucle).SOMLireNumero() == uiSomArr)
 				{
-					pSOMDest = new CSommet(SOMSom);
+					pSOMDest = &vListeSommet->at(uiBoucle);
 				}
 				//else
 				//	throw new CExceptions(OBJECT_DOESNT_EXIST);
 			}
 					
-			ARCArc = new CArc(pSOMDest);
+			if(pSOMDep == 0 || pSOMDest == 0)
+				throw new CExceptions(OBJECT_DOESNT_EXIST);
 
-			pSOMDest->SOMAffecterArcArrivant(ARCArc);
-			pSOMDep->SOMAffecterArcPartant(ARCArc);
+
+			pARCArc = new CArc(pSOMDest);
+
+			pSOMDest->SOMAffecterArcArrivant(pARCArc);
+			pSOMDep->SOMAffecterArcPartant(pARCArc);
 			
 		}
+		//cout << pGRAgraphe->GRALireSommets()->at(0).SOMLireArcArrivant()->at(0).ARCLiredest()->SOMLireNumero() << endl;
 	}
 	else
 		throw new CExceptions(BAD_INPUT);

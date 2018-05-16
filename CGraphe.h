@@ -4,6 +4,7 @@
 
 #include <vector>
 #include "CSommet.h"
+#include "CExceptions.h"
 #include <string>
 
 using namespace std;
@@ -12,7 +13,7 @@ class CGraphe
 {
 
 private:
-	unsigned int uiGRANbSommet;
+	
 	vector<CSommet> * pvSOMGRASommet;
 
 public:
@@ -80,7 +81,7 @@ public:
 	* vector<CSommet> une vecteur contenant tous les sommets du graphe
 	*Entraine :(Retourne un vecteur contenant les sommets du graphe)
 	*/
-	vector<CSommet> GRALireSommets();
+	vector<CSommet> * GRALireSommets();
 
 	/** Afficher le graphe
 	*E:
@@ -92,6 +93,9 @@ public:
 	*Entraine :(Le graphe est affiché)
 	*/
 	void GRAAfficher();
+
+
+	CSommet * GRATrouverParNum(unsigned int uiNum);
 };
 
 #endif 
