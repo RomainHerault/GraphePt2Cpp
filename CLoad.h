@@ -14,7 +14,7 @@ class CLoad
 
 private : 
 
-	string static sLODNomFichier;
+	string sLODNomFichier;
 
 public:
 	/** Ajoute le fichier 
@@ -26,7 +26,7 @@ public:
 	*
 	*Entraine :(Le nom du fichier est stocké dans la variable de la classe)
 	*/
-	void static LODAjouterFichier(string psNomFichier);
+	 CLoad(string psNomFichier);
 
 	/** Lit le fichier et le converti en graphe
 	*E:
@@ -37,6 +37,6 @@ public:
 	*
 	*Entraine :(Le graphe correspondant au contenu du fichier est créé)
 	*/
-	CGraphe static  * LODParser();
+	CGraphe  * LODParser();
 };
 #endif

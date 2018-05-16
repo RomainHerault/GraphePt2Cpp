@@ -86,7 +86,8 @@ void CGraphe::GRAAffecterSom(CSommet * SOMSommet)
 */
 vector<CSommet> CGraphe::GRALireSommets()
 {
-	return *(new vector<CSommet>());
+
+	return * pvSOMGRASommet;
 }
 
 /** Afficher le graphe
@@ -102,7 +103,7 @@ void CGraphe::GRAAfficher()
 {
 	for (CSommet SOMSommet : *pvSOMGRASommet)
 	{
-		for (CArc ARCArc : *SOMSommet.SOMLireArcPartant())
+		for (CArc ARCArc : * (SOMSommet.SOMLireArcPartant()))
 			printf("Le sommet %d va vers le sommet %d", SOMSommet.SOMLireNumero(), ARCArc.ARCLiredest()->SOMLireNumero());
 	}
 }

@@ -49,7 +49,7 @@ int CSommet::SOMLireNumero()
 
 void CSommet::SOMAffecterArcArrivant(CArc * ARCArc)
 {
-	vARCSOMArrivant->push_back(*(new CArc(*ARCArc)));
+	vARCSOMArrivant->push_back(*ARCArc);
 }
 
 void CSommet::SOMSupprimerArcArrivant(CArc * ARCArc)
@@ -67,7 +67,7 @@ vector<CArc> * CSommet::SOMLireArcArrivant()
 
 void CSommet::SOMAffecterArcPartant(CArc * ARCArc)
 {
-	vARCSOMPartant->push_back(*(new CArc(*ARCArc)));
+	vARCSOMPartant->push_back(*ARCArc);
 }
 
 void CSommet::SOMSupprimerArcPartant(CArc * ARCArc)
@@ -80,5 +80,5 @@ void CSommet::SOMSupprimerArcPartant(CArc * ARCArc)
 
 vector<CArc> * CSommet::SOMLireArcPartant()
 {
-	return vARCSOMPartant;
+	return  vARCSOMPartant;
 }

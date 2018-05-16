@@ -2,7 +2,7 @@
 #include "CLoad.h"
 
 
-/** Ajoute le fichier
+/** Constructeur
 *E:
 *
 *Necessite :
@@ -11,7 +11,7 @@
 *
 *Entraine :(Le nom du fichier est stocké dans la variable de la classe)
 */
-void CLoad::LODAjouterFichier(string psNomFichier)
+CLoad::CLoad(string psNomFichier)
 {
 	sLODNomFichier = psNomFichier;
 }
@@ -27,16 +27,15 @@ void CLoad::LODAjouterFichier(string psNomFichier)
 */
 CGraphe * CLoad::LODParser()
 {
-	string sData("");
+	string sData ("");
 	CGraphe * pGRAgraphe = new CGraphe();
 
 	
 	ifstream infile;
 	infile.open(sLODNomFichier.c_str());
 	infile >> sData;
-
-		
-		
+	
+	
 	unsigned int uiNbSom = atoi(sData.substr(10, 100).c_str());
 	infile >> sData;
 	unsigned int uiNbArcs = atoi(sData.substr(7, 100).c_str());
@@ -56,43 +55,52 @@ CGraphe * CLoad::LODParser()
 		throw new CExceptions(BAD_INPUT);
 
 	infile >> sData;
+	infile >> sData;
 	//lecture des arcs
 	if (sData.compare(0, 100, "Arcs=[") == 0)
 	{
 		CSommet * pSOMDest = 0;
 		CSommet * pSOMDep = 0;
-		for (int uiArc = 0; uiArc < uiNbArcs; uiArc++)
+		CArc * ARCArc = 0;
+		for (unsigned int uiArc = 0; uiArc < uiNbArcs; uiArc++)
 		{
 			infile >> sData;
 			unsigned int uiSomDep = atoi(sData.c_str());
-					
+
 
 			infile >> sData;
 			unsigned int uiSomArr = atoi(sData.c_str());
-			
-			for each (CSommet SOMSom in pGRAgraphe->GRALireSommets())
+
+			for (CSommet SOMSom : pGRAgraphe->GRALireSommets())
+			{
+				if (SOMSom.SOMLireNumero() == uiSomDep)
+				{
+					pSOMDep = new CSommet(SOMSom);
+				}
+				//else
+				//	throw new CExceptions(OBJECT_DOESNT_EXIST);
+			}
+			for (CSommet SOMSom : pGRAgraphe->GRALireSommets())
 			{
 				if (SOMSom.SOMLireNumero() == uiSomArr)
-					pSOMDest = &SOMSom;
-				else
-					throw new CExceptions(OBJECT_DOESNT_EXIST);
-
-				if (SOMSom.SOMLireNumero() == uiSomDep)
-					pSOMDep = &SOMSom;
-				else
-					throw new CExceptions(OBJECT_DOESNT_EXIST);
+				{
+					pSOMDest = new CSommet(SOMSom);
+				}
+				//else
+				//	throw new CExceptions(OBJECT_DOESNT_EXIST);
 			}
 					
-			CArc * ARCArc = new CArc(pSOMDest);
+			ARCArc = new CArc(pSOMDest);
 
 			pSOMDest->SOMAffecterArcArrivant(ARCArc);
 			pSOMDep->SOMAffecterArcPartant(ARCArc);
+			
 		}
 	}
 	else
 		throw new CExceptions(BAD_INPUT);
 
-	return pGRAgraphe;
+	return  pGRAgraphe;
 
 
 

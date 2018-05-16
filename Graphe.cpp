@@ -11,7 +11,32 @@ using namespace std;
 
 int main()
 {
-	cout << "hell world" << endl;
+	string sFileName;
+
+
+	cout << "Nom du fichier :" << endl;
+	cin >> sFileName;
+
+	try {
+
+	
+	CLoad * pLODLoader = new CLoad(sFileName);
+
+	CGraphe * pGRAGraphe = pLODLoader->LODParser();
+
+	pGRAGraphe->GRAAfficher();
+
+	}
+	catch (CExceptions e)
+	{
+		e.EXCAfficheErreur();
+	}
+
+	
+
+
+	system("pause");
+
 	return 0;
 }
 
