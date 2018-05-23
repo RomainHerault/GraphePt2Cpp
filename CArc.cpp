@@ -24,7 +24,9 @@ CArc::~CArc()
 
 void CArc::operator=(CArc & ARCParam)
 {
-	pSOMARCDestination = new CSommet(*(ARCParam.ARCLiredest()));
+	pSOMARCDestination = ARCParam.ARCLiredest();
+
+
 }
 
 void CArc::ARCAffecterDest(CSommet * pSOMSommet)

@@ -43,7 +43,17 @@ CGraphe::CGraphe(const CGraphe & GRAParam)
 */
 CGraphe::~CGraphe()
 {
+	//pvSOMGRASommet->clear();
+	//pvSOMGRASommet->erase(pvSOMGRASommet->begin(), pvSOMGRASommet->end());
+
+	/*while (pvSOMGRASommet->size() != 0)
+	{
+		pvSOMGRASommet->pop_back();
+	}*/
+	
 	delete pvSOMGRASommet;
+
+	
 }
 
 /** Surcharge de l'opérateur =
@@ -58,7 +68,7 @@ CGraphe::~CGraphe()
 void CGraphe::operator=(CGraphe & GRAParam)
 {
 	
-	pvSOMGRASommet = new vector<CSommet>(*GRAParam.pvSOMGRASommet);
+	pvSOMGRASommet = GRAParam.pvSOMGRASommet;
 }
 
 /** Ajoute un sommet au graphe

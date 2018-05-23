@@ -1,6 +1,6 @@
 // Graphe.cpp : Définit le point d'entrée pour l'application console.
 //
-
+#include <vld.h>
 #include "CArc.h"
 #include"CSommet.h"
 #include"CGraphe.h"
@@ -24,6 +24,9 @@ int main()
 
 	CGraphe * pGRAGraphe = pLODLoader->LODParser();
 
+	delete pLODLoader;
+	cout << "Voici le graphe dans le fichier :" << endl;
+
 	pGRAGraphe->GRAAfficher();
 
 	
@@ -46,18 +49,25 @@ int main()
 
 
 	//TODO 
+	//pour chaque sommets de l'ancien graphe
 	for (unsigned int uiBoucle = 0; uiBoucle < pvListeSommets->size(); uiBoucle++)
 	{
+		CSommet SOMsomOldGraphe = pvListeSommets->at(uiBoucle); //sommet du vieux graphe
+		CSommet * pSOMsomNewGraphe = pGRANewGraphe->GRATrouverParNum(SOMsomOldGraphe.SOMLireNumero()); //sommet de même numéro du nouveau graphe
 
-		vector<CArc> * pvListeArcPartant = pvListeSommets->at(uiBoucle).SOMLireArcPartant();
+		//liste des arcs qui  partent pour chaque sommet de l'ancien graphe
+		vector<CArc> * pvListeArcPartant = SOMsomOldGraphe.SOMLireArcPartant();
 
+		//pour chacun des arcs partants d'un sommet de l'ancien graphe
 		for (unsigned int uiBoucle2 = 0; uiBoucle2 < pvListeArcPartant->size(); uiBoucle2++)
 		{
-			//for(unsigned int uiBoucle3 = 0; uiBoucle3 < pvListeArcPartant->size(); uiBoucle3++
-				
-				)
-			CArc * pARCNewArc = new CArc(pSOMNewSommet);
-			pSOMNewSommet->SOMAffecterArcArrivant(pARCNewArc);
+			CSommet * pSOMDestArcOldGraphe = pvListeArcPartant->at(uiBoucle2).ARCLiredest();
+			CSommet * pSOMDepArcNewGraphe = pGRANewGraphe->GRATrouverParNum(pSOMDestArcOldGraphe->SOMLireNumero());
+
+			CArc * pARCNewArc = new CArc(pSOMsomNewGraphe);
+			pSOMsomNewGraphe->SOMAffecterArcArrivant(pARCNewArc);
+			pSOMDepArcNewGraphe->SOMAffecterArcPartant(pARCNewArc);
+			
 		}
 
 		/*vector<CArc> * pvListeArcArrivant = pvListeSommets->at(uiBoucle).SOMLireArcArrivant();
@@ -71,14 +81,22 @@ int main()
 	}
 
 
-
+	cout << "Voici le graphe inverse :" << endl;
 	pGRANewGraphe->GRAAfficher();
 
+	delete pGRAGraphe;
+	delete pGRANewGraphe;
+
+
+	
 	}
 	catch (CExceptions e)
 	{
+		
 		e.EXCAfficheErreur();
 	}
+
+	
 
 
 	system("pause");

@@ -27,19 +27,37 @@ CSommet::CSommet(const CSommet & SOMParam)
 
 CSommet::~CSommet()
 {
-	for (unsigned int uiCompteur = 0; uiCompteur < vARCSOMArrivant->size(); uiCompteur++)
+	/*for (unsigned int uiCompteur = 0; uiCompteur < vARCSOMArrivant->size(); uiCompteur++)
 		delete &vARCSOMArrivant->at(uiCompteur);
 	for (unsigned int uiCompteur = 0; uiCompteur < vARCSOMPartant->size(); uiCompteur++)
-		delete &vARCSOMPartant->at(uiCompteur);
+		delete &vARCSOMPartant->at(uiCompteur);*/
+	//vARCSOMArrivant->clear();
+	//vARCSOMPartant->clear();
+	/*while (vARCSOMArrivant->size() != 0)
+	{
+		vARCSOMArrivant->pop_back();
+	}
+
+	while (vARCSOMPartant->size() != 0)
+	{
+		vARCSOMPartant->pop_back();
+	}*/
+
+	delete vARCSOMArrivant;
+	delete vARCSOMPartant;
 }
 
 void CSommet::operator=(CSommet * SOMParam)
 {
 	uiSOMNumero = SOMParam->uiSOMNumero;
-	for (unsigned int uiCompteur = 0; uiCompteur < SOMParam->vARCSOMArrivant->size(); uiCompteur++)
-		vARCSOMArrivant->push_back(*(new CArc(SOMParam->vARCSOMArrivant->at(uiCompteur))));
+	vARCSOMArrivant = SOMParam->vARCSOMArrivant;
+	vARCSOMPartant = SOMParam->vARCSOMPartant;
+
+
+	/*for (unsigned int uiCompteur = 0; uiCompteur < SOMParam->vARCSOMArrivant->size(); uiCompteur++)
+		vARCSOMArrivant->push_back(SOMParam->vARCSOMArrivant->at(uiCompteur));
 	for (unsigned int uiCompteur = 0; uiCompteur < SOMParam->vARCSOMPartant->size(); uiCompteur++)
-		vARCSOMPartant->push_back(*(new CArc(SOMParam->vARCSOMPartant->at(uiCompteur))));
+		vARCSOMPartant->push_back(SOMParam->vARCSOMPartant->at(uiCompteur));*/
 }
 
 int CSommet::SOMLireNumero()
@@ -50,6 +68,7 @@ int CSommet::SOMLireNumero()
 void CSommet::SOMAffecterArcArrivant(CArc * ARCArc)
 {
 	vARCSOMArrivant->push_back(*ARCArc);
+	
 }
 
 void CSommet::SOMSupprimerArcArrivant(CArc * ARCArc)
