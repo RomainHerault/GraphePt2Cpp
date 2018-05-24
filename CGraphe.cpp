@@ -51,6 +51,8 @@ CGraphe::~CGraphe()
 		pvSOMGRASommet->pop_back();
 	}*/
 	
+
+	
 	delete pvSOMGRASommet;
 
 	
@@ -67,7 +69,6 @@ CGraphe::~CGraphe()
 */
 void CGraphe::operator=(CGraphe & GRAParam)
 {
-	
 	pvSOMGRASommet = GRAParam.pvSOMGRASommet;
 }
 
@@ -96,7 +97,6 @@ void CGraphe::GRAAffecterSom(CSommet * SOMSommet)
 */
 vector<CSommet> * CGraphe::GRALireSommets()
 {
-
 	return pvSOMGRASommet;
 }
 
@@ -111,13 +111,14 @@ vector<CSommet> * CGraphe::GRALireSommets()
 */
 void CGraphe::GRAAfficher()
 {
-	vector<CArc> vListeArc;
+	vector<CArc> * vListeArc = 0;
 	for (CSommet SOMSommet : *pvSOMGRASommet)
 	{
-		vListeArc = *(SOMSommet.SOMLireArcPartant());
-		for (unsigned int uiBoucle = 0; uiBoucle < vListeArc.size(); uiBoucle++  /*CArc ARCArc : * (SOMSommet.SOMLireArcPartant())*/)
-			printf("Le sommet %d va vers le sommet %d\n", SOMSommet.SOMLireNumero(), vListeArc.at(uiBoucle).ARCLiredest()->SOMLireNumero());
+		vListeArc = (SOMSommet.SOMLireArcPartant());
+		for (unsigned int uiBoucle = 0; uiBoucle < vListeArc->size(); uiBoucle++  /*CArc ARCArc : * (SOMSommet.SOMLireArcPartant())*/)
+			printf("Le sommet %d va vers le sommet %d\n", SOMSommet.SOMLireNumero(), vListeArc->at(uiBoucle).ARCLiredest()->SOMLireNumero());
 	}
+	
 }
 
 CSommet * CGraphe::GRATrouverParNum(unsigned int uiNum)

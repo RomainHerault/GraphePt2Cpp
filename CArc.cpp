@@ -4,7 +4,8 @@
 
 CArc::CArc()
 {
-	pSOMARCDestination = new CSommet();
+	//pSOMARCDestination = new CSommet();
+	
 }
 
 CArc::CArc(CSommet * pSOMSommet)
@@ -19,7 +20,7 @@ CArc::CArc(const CArc & ARCParam)
 
 CArc::~CArc()
 {
-	pSOMARCDestination = 0;
+	pSOMARCDestination = 0;	
 }
 
 void CArc::operator=(CArc & ARCParam)

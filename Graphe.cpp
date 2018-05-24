@@ -44,6 +44,7 @@ int main()
 		CSommet * pSOMNewSommet = new CSommet(pvListeSommets->at(uiBoucle).SOMLireNumero());
 		
 		pGRANewGraphe->GRAAffecterSom(pSOMNewSommet);
+		delete pSOMNewSommet;
 	}
 
 
@@ -67,22 +68,18 @@ int main()
 			CArc * pARCNewArc = new CArc(pSOMsomNewGraphe);
 			pSOMsomNewGraphe->SOMAffecterArcArrivant(pARCNewArc);
 			pSOMDepArcNewGraphe->SOMAffecterArcPartant(pARCNewArc);
-			
+			delete pARCNewArc;
 		}
 
-		/*vector<CArc> * pvListeArcArrivant = pvListeSommets->at(uiBoucle).SOMLireArcArrivant();
-
-		for (unsigned int uiBoucle3 = 0; uiBoucle3 < pvListeArcArrivant->size(); uiBoucle3++)
-		{
-			pSOMNewSommet->SOMAffecterArcPartant(&pvListeArcArrivant->at(uiBoucle3));
-		}
-		*/
 
 	}
 
 
 	cout << "Voici le graphe inverse :" << endl;
 	pGRANewGraphe->GRAAfficher();
+	
+
+	
 
 	delete pGRAGraphe;
 	delete pGRANewGraphe;

@@ -48,7 +48,9 @@ CGraphe * CLoad::LODParser()
 		{
 			infile >> sData;
 			unsigned int uiNumSom = atoi(sData.c_str());
-			pGRAgraphe->GRAAffecterSom(new CSommet(uiNumSom));
+			CSommet * SOMNewSommet = new CSommet(uiNumSom);
+			pGRAgraphe->GRAAffecterSom(SOMNewSommet);
+			delete SOMNewSommet;
 		}
 	}
 	else
@@ -99,6 +101,8 @@ CGraphe * CLoad::LODParser()
 
 			pSOMDest->SOMAffecterArcArrivant(pARCArc);
 			pSOMDep->SOMAffecterArcPartant(pARCArc);
+
+			delete pARCArc;
 			
 		}
 		//cout << pGRAgraphe->GRALireSommets()->at(0).SOMLireArcArrivant()->at(0).ARCLiredest()->SOMLireNumero() << endl;

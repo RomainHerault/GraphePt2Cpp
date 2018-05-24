@@ -6,6 +6,7 @@ using namespace std;
 
 CSommet::CSommet()
 {
+	
 	uiSOMNumero = 0;
 	vARCSOMArrivant = new vector<CArc>;
 	vARCSOMPartant = new vector<CArc>;
@@ -20,6 +21,7 @@ CSommet::CSommet(unsigned int uiNumero)
 
 CSommet::CSommet(const CSommet & SOMParam)
 {
+	
 	uiSOMNumero = SOMParam.uiSOMNumero;
 	vARCSOMArrivant = new vector<CArc>(*(SOMParam.vARCSOMArrivant));
 	vARCSOMPartant = new vector<CArc>(*(SOMParam.vARCSOMPartant));
@@ -42,13 +44,15 @@ CSommet::~CSommet()
 	{
 		vARCSOMPartant->pop_back();
 	}*/
-
+	
+	
 	delete vARCSOMArrivant;
 	delete vARCSOMPartant;
 }
 
 void CSommet::operator=(CSommet * SOMParam)
 {
+	
 	uiSOMNumero = SOMParam->uiSOMNumero;
 	vARCSOMArrivant = SOMParam->vARCSOMArrivant;
 	vARCSOMPartant = SOMParam->vARCSOMPartant;
