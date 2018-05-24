@@ -115,7 +115,7 @@ void CGraphe::GRAAfficher()
 	for (CSommet SOMSommet : *pvSOMGRASommet)
 	{
 		vListeArc = (SOMSommet.SOMLireArcPartant());
-		for (unsigned int uiBoucle = 0; uiBoucle < vListeArc->size(); uiBoucle++  /*CArc ARCArc : * (SOMSommet.SOMLireArcPartant())*/)
+		for (unsigned int uiBoucle = 0; uiBoucle < vListeArc->size(); uiBoucle++)
 			printf("Le sommet %d va vers le sommet %d\n", SOMSommet.SOMLireNumero(), vListeArc->at(uiBoucle).ARCLiredest()->SOMLireNumero());
 	}
 	

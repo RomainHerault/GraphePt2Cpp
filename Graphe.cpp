@@ -49,7 +49,6 @@ int main()
 
 
 
-	//TODO 
 	//pour chaque sommets de l'ancien graphe
 	for (unsigned int uiBoucle = 0; uiBoucle < pvListeSommets->size(); uiBoucle++)
 	{

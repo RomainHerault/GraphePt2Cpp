@@ -29,7 +29,7 @@ public:
 	* Initialise la variable SOMARCDestination avec la paramètre SOMSommet
 	*
 	* E:
-	* \param SOMSommet CSommet : Valeur à laquelle SOMARCDestination est initialiser
+	* \param SOMSommet CSommet : Valeur à laquelle SOMARCDestination est initialisée
 	*
 	*/
 	CArc(CSommet * SOMSommet);
@@ -59,7 +59,7 @@ public:
 	*
 	* E:
 	* \param ARCParam CArc : Objet contenant les valeurs à recopier
-	* \return CArc :
+	* 
 	*/
 	void operator=(CArc & ARCParam);
 
@@ -69,6 +69,7 @@ public:
 	* E:
 	* \param SOMSommet CSommet : Objet de la classe CSommet vers lequel notre instance classe se dirige
 	*
+	*Entraîne : (Remplace la destination de l'arc par le sommet placé en paramètre)
 	*/
 	void ARCAffecterDest(CSommet * pSOMSommet);
 
