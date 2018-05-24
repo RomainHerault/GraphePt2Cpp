@@ -94,7 +94,15 @@ public:
 	*/
 	void GRAAfficher();
 
-
+	/** Renvoie un sommet a partir d'un ID donné en paramètre
+	*E:
+	* unsigned int uiNum : ID du sommet à trouver et renvoyer
+	*Necessite :
+	*
+	*S:
+	* CSommet : Sommet correspondant à l'ID donné en paramètre
+	*Entraine :
+	*/
 	CSommet * GRATrouverParNum(unsigned int uiNum);
 };
 

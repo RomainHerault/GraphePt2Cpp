@@ -121,6 +121,15 @@ void CGraphe::GRAAfficher()
 	
 }
 
+/** Renvoie un sommet a partir d'un ID donné en paramètre
+*E:
+* unsigned int uiNum : ID du sommet à trouver et renvoyer
+*Necessite :
+*
+*S:
+* CSommet : Sommet correspondant à l'ID donné en paramètre
+*Entraine :
+*/
 CSommet * CGraphe::GRATrouverParNum(unsigned int uiNum)
 {
 	for (unsigned int uiBoucle = 0; uiBoucle < pvSOMGRASommet->size(); uiBoucle++)
