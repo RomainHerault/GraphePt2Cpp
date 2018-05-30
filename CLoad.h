@@ -12,25 +12,25 @@
 class CLoad
 {
 
-private : 
+private:
 
 	string sLODNomFichier;
 
 public:
-	/** Ajoute le fichier 
+	/** Ajoute le fichier
 	*E:
-	* 
+	*
 	*Necessite :
 	*
 	*S:
 	*
 	*Entraine :(Le nom du fichier est stocké dans la variable de la classe)
 	*/
-	 CLoad(string psNomFichier);
+	CLoad(string psNomFichier);
 
 	/** Lit le fichier et le converti en graphe
 	*E:
-	* 
+	*
 	*Necessite :
 	*
 	*S:

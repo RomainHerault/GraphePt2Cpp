@@ -13,6 +13,7 @@ class CArc
 {
 private:
 	CSommet * pSOMARCDestination;
+	unsigned int uiARCPoids;
 
 public:
 	/**
@@ -24,15 +25,16 @@ public:
 	CArc();
 
 	/**
-	* \brief Constructeur à 1 paramètre
+	* \brief Constructeur à 2 paramètre
 	*
 	* Initialise la variable SOMARCDestination avec la paramètre SOMSommet
 	*
 	* E:
-	* \param SOMSommet CSommet : Valeur à laquelle SOMARCDestination est initialiser
+	* \param SOMSommet CSommet : Valeur à laquelle SOMARCDestination est initialisée
+	/ \param uiNouveauPoids unsigned int : Distance de l'arc
 	*
 	*/
-	CArc(CSommet * SOMSommet);
+	CArc(CSommet * SOMSommet, unsigned int uiNouveauPoids);
 
 	/**
 	* \brief Constructeur de recopie
@@ -59,7 +61,7 @@ public:
 	*
 	* E:
 	* \param ARCParam CArc : Objet contenant les valeurs à recopier
-	* \return CArc :
+	*
 	*/
 	void operator=(CArc & ARCParam);
 
@@ -69,6 +71,7 @@ public:
 	* E:
 	* \param SOMSommet CSommet : Objet de la classe CSommet vers lequel notre instance classe se dirige
 	*
+	*Entraîne : (Remplace la destination de l'arc par le sommet placé en paramètre)
 	*/
 	void ARCAffecterDest(CSommet * pSOMSommet);
 
@@ -79,6 +82,14 @@ public:
 	* \return CSommet : Sommet vers lequel l'arc se dirige
 	*/
 	CSommet * ARCLiredest();
+
+	/**
+	* \brief envoie la valeur du paramètre uiPoids
+	*
+	* S:
+	* \return unsigned int : Distance de l'arc
+	*/
+	unsigned int ARCLirePoids();
 };
 
 #endif

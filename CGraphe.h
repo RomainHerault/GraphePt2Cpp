@@ -13,7 +13,7 @@ class CGraphe
 {
 
 private:
-	
+
 	vector<CSommet> * pvSOMGRASommet;
 
 public:
@@ -96,6 +96,9 @@ public:
 
 
 	CSommet * GRATrouverParNum(unsigned int uiNum);
+
+
+	vector<unsigned int> GRADijkstra(CSommet * SOMSommet);
 };
 
 #endif 

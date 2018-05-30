@@ -27,15 +27,15 @@ CLoad::CLoad(string psNomFichier)
 */
 CGraphe * CLoad::LODParser()
 {
-	string sData ("");
+	string sData("");
 	CGraphe * pGRAgraphe = new CGraphe();
 
-	
+
 	ifstream infile;
 	infile.open(sLODNomFichier.c_str());
 	infile >> sData;
-	
-	
+
+
 	unsigned int uiNbSom = atoi(sData.substr(10, 100).c_str());
 	infile >> sData;
 	unsigned int uiNbArcs = atoi(sData.substr(7, 100).c_str());
@@ -73,7 +73,10 @@ CGraphe * CLoad::LODParser()
 			infile >> sData;
 			unsigned int uiSomArr = atoi(sData.c_str());
 
-			vector<CSommet> * vListeSommet =  pGRAgraphe->GRALireSommets();
+			infile >> sData;
+			unsigned int uiPoids = atoi(sData.c_str());
+
+			vector<CSommet> * vListeSommet = pGRAgraphe->GRALireSommets();
 
 			for (unsigned int uiBoucle = 0; uiBoucle < vListeSommet->size(); uiBoucle++    /*CSommet SOMSom : pGRAgraphe->GRALireSommets()*/)
 			{
@@ -83,8 +86,8 @@ CGraphe * CLoad::LODParser()
 				}
 				//else
 				//	throw new CExceptions(OBJECT_DOESNT_EXIST);
-			
-			
+
+
 				if (vListeSommet->at(uiBoucle).SOMLireNumero() == uiSomArr)
 				{
 					pSOMDest = &vListeSommet->at(uiBoucle);
@@ -92,18 +95,18 @@ CGraphe * CLoad::LODParser()
 				//else
 				//	throw new CExceptions(OBJECT_DOESNT_EXIST);
 			}
-					
-			if(pSOMDep == 0 || pSOMDest == 0)
+
+			if (pSOMDep == 0 || pSOMDest == 0)
 				throw new CExceptions(OBJECT_DOESNT_EXIST);
 
 
-			pARCArc = new CArc(pSOMDest);
+			pARCArc = new CArc(pSOMDest, uiPoids);
 
 			pSOMDest->SOMAffecterArcArrivant(pARCArc);
 			pSOMDep->SOMAffecterArcPartant(pARCArc);
 
 			delete pARCArc;
-			
+
 		}
 		//cout << pGRAgraphe->GRALireSommets()->at(0).SOMLireArcArrivant()->at(0).ARCLiredest()->SOMLireNumero() << endl;
 	}
@@ -114,5 +117,5 @@ CGraphe * CLoad::LODParser()
 
 
 
-	
+
 }

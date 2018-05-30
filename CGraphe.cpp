@@ -12,7 +12,7 @@
 */
 CGraphe::CGraphe()
 {
-	
+
 	pvSOMGRASommet = new vector<CSommet>;
 
 }
@@ -28,7 +28,7 @@ CGraphe::CGraphe()
 */
 CGraphe::CGraphe(const CGraphe & GRAParam)
 {
-	
+
 	pvSOMGRASommet = new vector<CSommet>(*(GRAParam.pvSOMGRASommet));
 }
 
@@ -48,14 +48,14 @@ CGraphe::~CGraphe()
 
 	/*while (pvSOMGRASommet->size() != 0)
 	{
-		pvSOMGRASommet->pop_back();
+	pvSOMGRASommet->pop_back();
 	}*/
-	
 
-	
+
+
 	delete pvSOMGRASommet;
 
-	
+
 }
 
 /** Surcharge de l'opérateur =
@@ -115,12 +115,21 @@ void CGraphe::GRAAfficher()
 	for (CSommet SOMSommet : *pvSOMGRASommet)
 	{
 		vListeArc = (SOMSommet.SOMLireArcPartant());
-		for (unsigned int uiBoucle = 0; uiBoucle < vListeArc->size(); uiBoucle++  /*CArc ARCArc : * (SOMSommet.SOMLireArcPartant())*/)
-			printf("Le sommet %d va vers le sommet %d\n", SOMSommet.SOMLireNumero(), vListeArc->at(uiBoucle).ARCLiredest()->SOMLireNumero());
+		for (unsigned int uiBoucle = 0; uiBoucle < vListeArc->size(); uiBoucle++)
+			printf("Le sommet %d va vers le sommet %d, une distance de %dm les separe\n", SOMSommet.SOMLireNumero(), vListeArc->at(uiBoucle).ARCLiredest()->SOMLireNumero(), vListeArc->at(uiBoucle).ARCLirePoids());
 	}
-	
+
 }
 
+/** Renvoie un sommet a partir d'un ID donné en paramètre
+*E:
+* unsigned int uiNum : ID du sommet a trouver et renvoyer
+*Necessite :
+*
+*S:
+* CSommet : Sommet correspondant à l'ID donné en paramètre
+*Entraine :
+*/
 CSommet * CGraphe::GRATrouverParNum(unsigned int uiNum)
 {
 	for (unsigned int uiBoucle = 0; uiBoucle < pvSOMGRASommet->size(); uiBoucle++)
@@ -129,4 +138,72 @@ CSommet * CGraphe::GRATrouverParNum(unsigned int uiNum)
 			return &pvSOMGRASommet->at(uiBoucle);
 	}
 	throw new CExceptions(OBJECT_DOESNT_EXIST);
+}
+
+class CoupleArcLg {
+public : 
+	CArc * ARCArc;
+	unsigned int uiLongueur;
+
+public : 
+	CoupleArcLg(CArc * arc, unsigned int uiLg) {
+		ARCArc = arc;
+		uiLongueur = uiLg;
+
+		/*ARCArc getArc() {
+			return ARCArc;
+		}*/
+
+	}
+};
+
+vector<unsigned int> CGraphe::GRADijkstra(CSommet * SOMSommet)
+{
+	
+	vector<CoupleArcLg> * vFile = new vector<CoupleArcLg>();
+	      
+	unsigned int * puiDsTab  = (unsigned int *) malloc(pvSOMGRASommet->size() * sizeof(unsigned int));
+
+	vector<CSommet> * vVus = new vector<CSommet>();
+
+
+
+	vVus->push_back(*SOMSommet);
+
+	for (CArc ARCArc : *(SOMSommet->SOMLireArcPartant()))
+	{
+		unsigned int uiLongueur = 0 /*ds[s] = 0*/ + ARCArc.ARCLirePoids();
+		GRAInserer(vuiFile, ARCArc, uiLongueur);
+	}
+
+	while (vFile->size() > 0)
+	{
+		CoupleArcLg newCouple = GRAExtraireMin(vFile);
+		CSommet * v = newCouple.ARCArc->ARCLiredest();
+		int isIn = 0;
+		for (CSommet SOMSom : *vVus)
+		{
+			if (&SOMSom == v)// a vérifier
+				isIn = 1;
+
+		}
+		if (isIn == 0)
+		{
+
+			if (isIn == 0)
+			{
+				puiDsTab[v->SOMLireNumero()] = newCouple.uiLongueur;
+				vVus->push_back(*v);
+
+
+			}
+
+
+
+		
+
+		}
+	}
+
+
 }
