@@ -51,7 +51,16 @@ int main()
 
 	
 
+	unsigned int * ds = pGRAGraphe->GRADijkstra(&(pGRAGraphe->GRALireSommets()->at(0)));
 	
+
+	for (unsigned int uiNoeud ; uiNoeud < pGRAGraphe->GRALireSommets()->size(); uiNoeud++)
+	{
+		printf("Noeud %d : longueur %d", uiNoeud, ds[uiNoeud]);
+	
+	}
+
+
 
 	delete pGRAGraphe;
 	

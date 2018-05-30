@@ -64,7 +64,7 @@ void CSommet::operator=(CSommet * SOMParam)
 		vARCSOMPartant->push_back(SOMParam->vARCSOMPartant->at(uiCompteur));*/
 }
 
-int CSommet::SOMLireNumero()
+unsigned int CSommet::SOMLireNumero()
 {
 	return uiSOMNumero;
 }

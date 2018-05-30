@@ -97,8 +97,17 @@ public:
 
 	CSommet * GRATrouverParNum(unsigned int uiNum);
 
+	class CoupleArcLg;
 
-	vector<unsigned int> GRADijkstra(CSommet * SOMSommet);
+	unsigned int * GRADijkstra(CSommet * SOMSommet);
+
+	CSommet * GRATrouveSomDep(CArc * ARCArc);
+
+	CoupleArcLg * GRAExtraireMin(vector<CoupleArcLg> * vFile);
+
+	void GRARemoveElement(vector<CoupleArcLg> * vFile, CoupleArcLg * cal);
+
+	void GRAInserer(std::vector<CoupleArcLg> * vFile, CArc ARCArc, unsigned int uiLongueur);
 };
 
 #endif 

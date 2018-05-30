@@ -140,7 +140,7 @@ CSommet * CGraphe::GRATrouverParNum(unsigned int uiNum)
 	throw new CExceptions(OBJECT_DOESNT_EXIST);
 }
 
-class CoupleArcLg {
+class CGraphe::CoupleArcLg {
 public : 
 	CArc * ARCArc;
 	unsigned int uiLongueur;
@@ -157,29 +157,30 @@ public :
 	}
 };
 
-vector<unsigned int> CGraphe::GRADijkstra(CSommet * SOMSommet)
+unsigned int * CGraphe::GRADijkstra(CSommet * SOMSommet)
 {
 	
-	vector<CoupleArcLg> * vFile = new vector<CoupleArcLg>();
+	vector<CoupleArcLg> * vFile = new vector<CoupleArcLg>(); //filede priorité contenant des couples Arc/distance totale
 	      
-	unsigned int * puiDsTab  = (unsigned int *) malloc(pvSOMGRASommet->size() * sizeof(unsigned int));
+	unsigned int * puiDsTab  = (unsigned int *) malloc(pvSOMGRASommet->size() * sizeof(unsigned int));//tableau contenant les distances finales
 
-	vector<CSommet> * vVus = new vector<CSommet>();
+	vector<CSommet> * vVus = new vector<CSommet>();//Sommets que l'on a déjà parcourus
 
 
 
 	vVus->push_back(*SOMSommet);
-
+	unsigned int uiLongueur = 0;
 	for (CArc ARCArc : *(SOMSommet->SOMLireArcPartant()))
 	{
-		unsigned int uiLongueur = 0 /*ds[s] = 0*/ + ARCArc.ARCLirePoids();
-		GRAInserer(vuiFile, ARCArc, uiLongueur);
+		uiLongueur = 0 /*ds[s] = 0*/ + ARCArc.ARCLirePoids();
+		GRAInserer(vFile, ARCArc, uiLongueur);
 	}
 
 	while (vFile->size() > 0)
 	{
-		CoupleArcLg newCouple = GRAExtraireMin(vFile);
-		CSommet * v = newCouple.ARCArc->ARCLiredest();
+		CoupleArcLg * newCouple = GRAExtraireMin(vFile);
+		CSommet * v = newCouple->ARCArc->ARCLiredest();
+		
 		int isIn = 0;
 		for (CSommet SOMSom : *vVus)
 		{
@@ -189,21 +190,68 @@ vector<unsigned int> CGraphe::GRADijkstra(CSommet * SOMSommet)
 		}
 		if (isIn == 0)
 		{
-
-			if (isIn == 0)
+			puiDsTab[v->SOMLireNumero()] = newCouple->uiLongueur;
+			vVus->push_back(*v); //on ajoute v à Vus
+			for (CArc ARCSortant : *(v->SOMLireArcPartant()))
 			{
-				puiDsTab[v->SOMLireNumero()] = newCouple.uiLongueur;
-				vVus->push_back(*v);
-
-
+				uiLongueur = puiDsTab[v->SOMLireNumero()] + ARCSortant.ARCLirePoids();
+				GRAInserer(vFile, ARCSortant, uiLongueur);
 			}
-
-
-
-		
 
 		}
 	}
-
-
+	return puiDsTab;
 }
+
+void CGraphe::GRAInserer(vector<CoupleArcLg> * vFile, CArc ARCArc, unsigned int uiLongueur)
+{
+	vFile->push_back(*(new CoupleArcLg(&ARCArc, uiLongueur)));
+}
+
+CGraphe::CoupleArcLg * CGraphe::GRAExtraireMin(vector<CoupleArcLg> * vFile)
+{
+	CoupleArcLg * coupleMin = &(vFile->at(0)); // le sommet de la destination de l'arc de couplemin est null, whyyyyyy ???! (passage par valeur avant ?)
+	printf("%d", coupleMin->ARCArc->ARCLiredest()->SOMLireNumero());
+	for (CoupleArcLg couple : *vFile)
+	{
+		if (couple.uiLongueur < coupleMin->uiLongueur)
+		{
+			
+			coupleMin = &couple; 
+		}
+	}
+	GRARemoveElement(vFile, coupleMin);
+	
+	return coupleMin;
+}
+
+void CGraphe::GRARemoveElement(vector<CoupleArcLg> * vFile, CoupleArcLg * cal)
+{
+	for (unsigned int uiBoucle = 0; uiBoucle < vFile->size(); uiBoucle++)
+	{
+		if (&vFile->at(uiBoucle) == cal)
+		{
+			vFile->erase(vFile->begin() + uiBoucle);
+			return;
+		}
+	}
+		
+}
+
+CSommet * CGraphe::GRATrouveSomDep(CArc * ARCArc)
+{
+
+	for (CSommet Som : *pvSOMGRASommet)
+	{
+		for (CArc ARCArcPartant : *(Som.SOMLireArcPartant()))
+		{
+			if (ARCArc->ARCLiredest()->SOMLireNumero() == ARCArcPartant.ARCLiredest()->SOMLireNumero() && ARCArc->ARCLirePoids() == ARCArcPartant.ARCLirePoids())
+			{
+				return &Som;
+			}
+		}
+		
+	}
+	return 0;
+}
+
