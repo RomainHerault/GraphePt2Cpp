@@ -97,7 +97,22 @@ public:
 
 	CSommet * GRATrouverParNum(unsigned int uiNum);
 
-	class CoupleArcLg;
+	class CoupleArcLg {
+	public:
+		CArc * ARCArc;
+		unsigned int uiLongueur = 0;
+
+	public:
+		CoupleArcLg(CArc * arc, unsigned int uiLg) {
+			ARCArc = arc;
+			uiLongueur = uiLg;
+
+			/*ARCArc getArc() {
+			return ARCArc;
+			}*/
+
+		}
+	};
 
 	unsigned int * GRADijkstra(CSommet * SOMSommet);
 
@@ -107,7 +122,7 @@ public:
 
 	void GRARemoveElement(vector<CoupleArcLg> * vFile, CoupleArcLg * cal);
 
-	void GRAInserer(std::vector<CoupleArcLg> * vFile, CArc ARCArc, unsigned int uiLongueur);
+	void GRAInserer(std::vector<CoupleArcLg> * vFile, CArc * ARCArc, unsigned int uiLongueur);
 };
 
 #endif 

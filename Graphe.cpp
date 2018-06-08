@@ -53,10 +53,10 @@ int main()
 
 	unsigned int * ds = pGRAGraphe->GRADijkstra(&(pGRAGraphe->GRALireSommets()->at(0)));
 	
-
-	for (unsigned int uiNoeud ; uiNoeud < pGRAGraphe->GRALireSommets()->size(); uiNoeud++)
+	printf("on part du noeud %d\n", pGRAGraphe->GRALireSommets()->at(0).SOMLireNumero());
+	for (unsigned int uiNoeud = 0  ; uiNoeud < pGRAGraphe->GRALireSommets()->size(); uiNoeud++)
 	{
-		printf("Noeud %d : longueur %d", uiNoeud, ds[uiNoeud]);
+		printf("Noeud %d : longueur %d \n",uiNoeud+1, ds[uiNoeud]);
 	
 	}
 

@@ -72,7 +72,6 @@ unsigned int CSommet::SOMLireNumero()
 void CSommet::SOMAffecterArcArrivant(CArc * ARCArc)
 {
 	vARCSOMArrivant->push_back(*ARCArc);
-	
 }
 
 void CSommet::SOMSupprimerArcArrivant(CArc * ARCArc)
