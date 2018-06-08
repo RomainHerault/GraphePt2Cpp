@@ -176,68 +176,53 @@ unsigned int * CGraphe::GRADijkstra(CSommet * SOMSommet)
 	vVus->push_back(*SOMSommet);
 	unsigned int uiLongueur = 0;
 	
-	for (int j = 0 ; j < SOMSommet->SOMLireArcPartant()->size(); j++   /*CArc ARCArc : *(SOMSommet->SOMLireArcPartant())*/)
+	for (unsigned int uiBoucle = 0 ; uiBoucle < SOMSommet->SOMLireArcPartant()->size(); uiBoucle++)
 	{
 
-		uiLongueur = 0 /*ds[s] = 0*/ + SOMSommet->SOMLireArcPartant()->at(j).ARCLirePoids();
-		GRAInserer(vFile, &SOMSommet->SOMLireArcPartant()->at(j), uiLongueur);
-
-		/*printf("Arc que l'on veut ajouter : %d\n", SOMSommet->SOMLireArcPartant()->at(j).ARCLiredest()->SOMLireNumero());
-		for (int i = 0; i < vFile->size(); i++)
-		{
-			printf("%d, @: %d   ", vFile->at(i).ARCArc->ARCLiredest()->SOMLireNumero(), &(vFile->at(i)));
-			
-			//printf("%d\n", vFile->at(0).ARCArc->ARCLiredest()->SOMLireNumero());
-			
-		}
-		printf("\n");*/
-		
-		//printf("%d", vFile->size());
+		uiLongueur = 0 /*ds[s] = 0*/ + SOMSommet->SOMLireArcPartant()->at(uiBoucle).ARCLirePoids();
+		GRAInserer(vFile, &SOMSommet->SOMLireArcPartant()->at(uiBoucle), uiLongueur);
 	}
-
 	while (vFile->size() > 0)
 	{
-		CoupleArcLg * newCouple = GRAExtraireMin(vFile);
-		printf("Min : %d", newCouple->ARCArc->ARCLiredest()->SOMLireNumero());
-		CSommet * v = newCouple->ARCArc->ARCLiredest();
+		CoupleArcLg * pCALnewCouple = GRAExtraireMin(vFile);
+	
+		CSommet * pSOMv = pCALnewCouple->ARCArc->ARCLiredest();
 		
 		int isIn = 0;
-		for (int i = 0 ; i < vVus->size(); i++   /*CSommet SOMSom : *vVus*/)
+		for (unsigned int uiBoucle2 = 0 ; uiBoucle2 < vVus->size(); uiBoucle2++)
 		{
-			if (vVus->at(i).SOMLireNumero() == v->SOMLireNumero())// a vérifier
+			if (vVus->at(uiBoucle2).SOMLireNumero() == pSOMv->SOMLireNumero())
 				isIn = 1;
 
 		}
 		if (isIn == 0)
 		{
-			puiDsTab[v->SOMLireNumero()-1] = newCouple->uiLongueur;
-			vVus->push_back(*v); //on ajoute v à Vus
-			for (int j = 0; j < v->SOMLireArcPartant()->size(); j++/*CArc ARCSortant : *(v->SOMLireArcPartant())*/)
+			puiDsTab[pSOMv->SOMLireNumero()-1] = pCALnewCouple->uiLongueur;
+			vVus->push_back(*pSOMv); //on ajoute v à Vus
+			for (unsigned int uiBoucle3 = 0; uiBoucle3 < pSOMv->SOMLireArcPartant()->size(); uiBoucle3++)
 			{
-				uiLongueur = puiDsTab[v->SOMLireNumero()-1] + v->SOMLireArcPartant()->at(j).ARCLirePoids();
-				GRAInserer(vFile, &(v->SOMLireArcPartant()->at(j)), uiLongueur);
+				uiLongueur = puiDsTab[pSOMv->SOMLireNumero()-1] + pSOMv->SOMLireArcPartant()->at(uiBoucle3).ARCLirePoids();
+				GRAInserer(vFile, &(pSOMv->SOMLireArcPartant()->at(uiBoucle3)), uiLongueur);
 			}
 		}
+		delete pCALnewCouple;
 	}
+	delete vFile;
+	delete vVus;
 	return puiDsTab;
 }
 
 void CGraphe::GRAInserer(vector<CoupleArcLg> * vFile, CArc * ARCArc, unsigned int uiLongueur)
 {
 	int isUpdated = 0;
-	printf("Destination : %d, longueur : %d \n", ARCArc->ARCLiredest()->SOMLireNumero(), uiLongueur);
-	for (int i = 0; i < vFile->size(); i++)
+	for (unsigned int uiBoucle = 0; uiBoucle < vFile->size(); uiBoucle++)
 	{
-		printf("%d - %d \n%d - %d \n%d - %d\n\n", vFile->at(i).ARCArc->ARCLiredest()->SOMLireNumero(), ARCArc->ARCLiredest()->SOMLireNumero(),
-			GRATrouveSomDep(vFile->at(i).ARCArc)->SOMLireNumero(), GRATrouveSomDep(ARCArc)->SOMLireNumero(),
-			uiLongueur, vFile->at(i).uiLongueur);
-		if ((vFile->at(i).ARCArc->ARCLiredest()->SOMLireNumero() == ARCArc->ARCLiredest()->SOMLireNumero() &&  
-			GRATrouveSomDep(vFile->at(i).ARCArc)->SOMLireNumero() == GRATrouveSomDep(ARCArc)->SOMLireNumero()))
+			if ((vFile->at(uiBoucle).ARCArc->ARCLiredest()->SOMLireNumero() == ARCArc->ARCLiredest()->SOMLireNumero() &&
+			GRATrouveSomDep(vFile->at(uiBoucle).ARCArc)->SOMLireNumero() == GRATrouveSomDep(ARCArc)->SOMLireNumero()))
 		{
-			if (uiLongueur < vFile->at(i).uiLongueur)
+			if (uiLongueur < vFile->at(uiBoucle).uiLongueur)
 			{
-				printf("il entre dans le if");
-				vFile->at(i).uiLongueur = uiLongueur;
+				vFile->at(uiBoucle).uiLongueur = uiLongueur;
 			}
 			isUpdated = 1;
 			
@@ -246,31 +231,26 @@ void CGraphe::GRAInserer(vector<CoupleArcLg> * vFile, CArc * ARCArc, unsigned in
 
 	if (isUpdated == 0)
 	{
-		CoupleArcLg * CoupleAAjouter = new CoupleArcLg(ARCArc, uiLongueur);
-		vFile->push_back(*CoupleAAjouter);
+		CoupleArcLg * pCALCoupleAAjouter = new CoupleArcLg(ARCArc, uiLongueur);
+		vFile->push_back(*pCALCoupleAAjouter);
+		delete pCALCoupleAAjouter;
 	}
-
-	
-	
-
-	//pas là
 
 }
 
 CGraphe::CoupleArcLg * CGraphe::GRAExtraireMin(vector<CoupleArcLg> * vFile)
 {
-	CoupleArcLg * coupleMin = &(vFile->at(0)); // le sommet de la destination de l'arc de couplemin est null, whyyyyyy ???! (passage par valeur avant ?)
-	//printf("%d", coupleMin->ARCArc->ARCLiredest()->SOMLireNumero());
-	for (int i = 0; i < vFile->size(); i++   /*CoupleArcLg couple : *vFile*/)
+	CoupleArcLg * pCALCoupleMin = &(vFile->at(0)); 
+	for (unsigned int uiBoucle = 0; uiBoucle < vFile->size(); uiBoucle++)
 	{
-		if (vFile->at(i).uiLongueur < coupleMin->uiLongueur)
+		if (vFile->at(uiBoucle).uiLongueur < pCALCoupleMin->uiLongueur)
 		{
-			coupleMin = &vFile->at(i);
+			pCALCoupleMin = &vFile->at(uiBoucle);
 		}
 	}
-	GRARemoveElement(vFile, coupleMin);
-	
-	return coupleMin; //pb ici (devrait retourner l'arc du noeud 2 en premier
+	CoupleArcLg * pCALCoupleSauv = new CoupleArcLg(*pCALCoupleMin);
+	GRARemoveElement(vFile, pCALCoupleMin);
+	return pCALCoupleSauv;
 }
 
 void CGraphe::GRARemoveElement(vector<CoupleArcLg> * vFile, CoupleArcLg * cal)
@@ -289,14 +269,14 @@ void CGraphe::GRARemoveElement(vector<CoupleArcLg> * vFile, CoupleArcLg * cal)
 CSommet * CGraphe::GRATrouveSomDep(CArc * ARCArc)
 {
 
-	for (int i = 0 ; i< pvSOMGRASommet->size(); i++ /*CSommet Som : *pvSOMGRASommet*/)
+	for (unsigned int uiBoucle = 0 ; uiBoucle< pvSOMGRASommet->size(); uiBoucle++)
 	{
-		for (int j = 0; j < pvSOMGRASommet->at(i).SOMLireArcPartant()->size(); j++/*CArc ARCArcPartant : *(Som.SOMLireArcPartant())*/)
+		for (unsigned int uiBoucle2 = 0; uiBoucle2 < pvSOMGRASommet->at(uiBoucle).SOMLireArcPartant()->size(); uiBoucle2++)
 		{
-			if (ARCArc->ARCLiredest()->SOMLireNumero() == pvSOMGRASommet->at(i).SOMLireArcPartant()->at(j).ARCLiredest()->SOMLireNumero()
-				&& ARCArc->ARCLirePoids() == pvSOMGRASommet->at(i).SOMLireArcPartant()->at(j).ARCLirePoids())
+			if (ARCArc->ARCLiredest()->SOMLireNumero() == pvSOMGRASommet->at(uiBoucle).SOMLireArcPartant()->at(uiBoucle2).ARCLiredest()->SOMLireNumero()
+				&& ARCArc->ARCLirePoids() == pvSOMGRASommet->at(uiBoucle).SOMLireArcPartant()->at(uiBoucle2).ARCLirePoids())
 			{
-				return &(pvSOMGRASommet->at(i));
+				return &(pvSOMGRASommet->at(uiBoucle));
 			}
 		}	
 	}

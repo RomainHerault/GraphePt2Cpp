@@ -30,7 +30,7 @@ int main()
 	pGRAGraphe->GRAAfficher();
 
 	
-
+/*
 	//On prend les sommets de départ, on récupere les arcs et leur sommet de dest et on switch les 2 sommets
 
 	vector<CSommet> * pvListeSommets = pGRAGraphe->GRALireSommets();
@@ -46,11 +46,7 @@ int main()
 		pGRANewGraphe->GRAAffecterSom(pSOMNewSommet);
 		delete pSOMNewSommet;
 	}
-
-
-
-	
-
+	*/
 	unsigned int * ds = pGRAGraphe->GRADijkstra(&(pGRAGraphe->GRALireSommets()->at(0)));
 	
 	printf("on part du noeud %d\n", pGRAGraphe->GRALireSommets()->at(0).SOMLireNumero());
@@ -60,7 +56,7 @@ int main()
 	
 	}
 
-
+	free(ds);
 
 	delete pGRAGraphe;
 	

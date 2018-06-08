@@ -110,7 +110,6 @@ public:
 			/*ARCArc getArc() {
 			return ARCArc;
 			}*/
-
 		}
 	};
 
