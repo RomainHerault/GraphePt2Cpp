@@ -139,24 +139,15 @@ CSommet * CGraphe::GRATrouverParNum(unsigned int uiNum)
 	}
 	throw new CExceptions(OBJECT_DOESNT_EXIST);
 }
-/*
-class CGraphe::CoupleArcLg {
-public : 
-	CArc * ARCArc;
-	unsigned int uiLongueur;
 
-public : 
-	CoupleArcLg(CArc * arc, unsigned int uiLg) {
-		ARCArc = arc;
-		uiLongueur = uiLg;
-
-		/*ARCArc getArc() {
-			return ARCArc;
-		}*/
-/*
-	}
-};*/
-
+/** Algorithme de Dijkstra
+*E:
+*SOMSommet CSommet le sommet duquel on veut partir pour effectuer Dijkstra
+*Necessite :
+*
+*S:
+* unsigned int * : Tableau de naturels où t[i] est la distance minimale pour aller du sommet de départ jusqu'au sommet i
+*/
 unsigned int * CGraphe::GRADijkstra(CSommet * SOMSommet)
 {
 	
@@ -170,8 +161,6 @@ unsigned int * CGraphe::GRADijkstra(CSommet * SOMSommet)
 	}
 
 	vector<CSommet> * vVus = new vector<CSommet>();//Sommets que l'on a déjà parcourus
-
-
 
 	vVus->push_back(*SOMSommet);
 	unsigned int uiLongueur = 0;
@@ -212,6 +201,19 @@ unsigned int * CGraphe::GRADijkstra(CSommet * SOMSommet)
 	return puiDsTab;
 }
 
+/** Ajoute un nouveau couple CoupleArcLg dans vFile 
+*E:
+* vector<CoupleArcLg> * vFile : la file de l'algorithme de Dijkstra
+* CArc * ARCArc : l'arc que l'on veut ajouter
+* unsigned int uiLongueur : la longueur totale pour aller jusqu'à cet arc 
+*
+*Necessite :
+*
+*S:
+*
+*Entraine :(Ajout du couple CoupleArcLg conteant ARCArc et uiLongueur dans vFile) OU (Actualisation de le longueur du couple
+*CoupleArcLg si il en existe déjà un contenant ARCArc dans vFile)
+*/
 void CGraphe::GRAInserer(vector<CoupleArcLg> * vFile, CArc * ARCArc, unsigned int uiLongueur)
 {
 	int isUpdated = 0;
@@ -238,6 +240,16 @@ void CGraphe::GRAInserer(vector<CoupleArcLg> * vFile, CArc * ARCArc, unsigned in
 
 }
 
+/** Extrait le couple de longueur minimale de vFile
+*E:
+* vector<CoupleArcLg> * vFile : la file de l'algorithme de Dijkstra
+*
+*Necessite :
+*vFile contient au moins un CoupleArcLg
+*S:
+*CoupleArcLg * : le couple de longueur minimale dans vFile
+*Entraine :(Retrait du couple de longueur minimale dans vFile et on retourne celui-ci)
+*/
 CGraphe::CoupleArcLg * CGraphe::GRAExtraireMin(vector<CoupleArcLg> * vFile)
 {
 	CoupleArcLg * pCALCoupleMin = &(vFile->at(0)); 
@@ -253,11 +265,21 @@ CGraphe::CoupleArcLg * CGraphe::GRAExtraireMin(vector<CoupleArcLg> * vFile)
 	return pCALCoupleSauv;
 }
 
-void CGraphe::GRARemoveElement(vector<CoupleArcLg> * vFile, CoupleArcLg * cal)
+/** Supprime un CoupleArcLg d'un vetceur
+*E:
+* vector<CoupleArcLg> * vFile : la file de l'algorithme de Dijkstra
+*CoupleArcLg * cal : l'element a supprimer
+*Necessite :
+*
+*S:
+*
+*Entraine :(Supppression de CALcal dans VFile)
+*/
+void CGraphe::GRARemoveElement(vector<CoupleArcLg> * vFile, CoupleArcLg * CALcal)
 {
 	for (unsigned int uiBoucle = 0; uiBoucle < vFile->size(); uiBoucle++)
 	{
-		if (vFile->at(uiBoucle).ARCArc == cal->ARCArc)
+		if (vFile->at(uiBoucle).ARCArc == CALcal->ARCArc)
 		{
 			vFile->erase(vFile->begin() + uiBoucle);
 			return;
@@ -266,6 +288,16 @@ void CGraphe::GRARemoveElement(vector<CoupleArcLg> * vFile, CoupleArcLg * cal)
 		
 }
 
+/** Trouve le sommet de départ d'un arc
+*E:
+* CArc * ARCArc : l'arc auquel on veut trouver son sommet de départ
+*
+*Necessite :
+*
+*S:
+*CSommet * : le sommet de départ de l'arc ARCArc
+*Entraine :
+*/
 CSommet * CGraphe::GRATrouveSomDep(CArc * ARCArc)
 {
 

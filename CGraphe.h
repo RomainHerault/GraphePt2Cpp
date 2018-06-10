@@ -94,9 +94,21 @@ public:
 	*/
 	void GRAAfficher();
 
-
+	/** Renvoie un sommet a partir d'un ID donné en paramètre
+	*E:
+	* unsigned int uiNum : ID du sommet a trouver et renvoyer
+	*Necessite :
+	*
+	*S:
+	* CSommet : Sommet correspondant à l'ID donné en paramètre
+	*Entraine :
+	*/
 	CSommet * GRATrouverParNum(unsigned int uiNum);
 
+	/**
+	*Classe représentant un couple d'un arc et d'une longueur
+	*Permet de remplir la file de priorité pour l'algorithme de Dijkstra
+	*/
 	class CoupleArcLg {
 	public:
 		CArc * ARCArc;
@@ -106,21 +118,68 @@ public:
 		CoupleArcLg(CArc * arc, unsigned int uiLg) {
 			ARCArc = arc;
 			uiLongueur = uiLg;
-
-			/*ARCArc getArc() {
-			return ARCArc;
-			}*/
 		}
 	};
 
+	/** Algorithme de Dijkstra
+	*E:
+	*SOMSommet CSommet le sommet duquel on veut partir pour effectuer Dijkstra
+	*Necessite :
+	*
+	*S:
+	* unsigned int * : Tableau de naturels où t[i] est la distance minimale pour aller du sommet de départ jusqu'au sommet i
+	*/
 	unsigned int * GRADijkstra(CSommet * SOMSommet);
 
+	/** Trouve le sommet de départ d'un arc
+	*E:
+	* CArc * ARCArc : l'arc auquel on veut trouver son sommet de départ
+	*
+	*Necessite :
+	*
+	*S:
+	*CSommet * : le sommet de départ de l'arc ARCArc
+	*Entraine :
+	*/
 	CSommet * GRATrouveSomDep(CArc * ARCArc);
 
+	/** Extrait le couple de longueur minimale de vFile
+	*E:
+	* vector<CoupleArcLg> * vFile : la file de l'algorithme de Dijkstra
+	*
+	*Necessite :
+	*vFile contient au moins un CoupleArcLg
+	*S:
+	*CoupleArcLg * : le couple de longueur minimale dans vFile
+	*Entraine :(Retrait du couple de longueur minimale dans vFile et on retourne celui-ci)
+	*/
 	CoupleArcLg * GRAExtraireMin(vector<CoupleArcLg> * vFile);
 
+	/** Supprime un CoupleArcLg d'un vetceur
+	*E:
+	* vector<CoupleArcLg> * vFile : la file de l'algorithme de Dijkstra
+	*CoupleArcLg * cal : l'element a supprimer
+	*Necessite :
+	*
+	*S:
+	*
+	*Entraine :(Supppression de CALcal dans VFile)
+	*/
 	void GRARemoveElement(vector<CoupleArcLg> * vFile, CoupleArcLg * cal);
 
+	/** Ajoute un nouveau couple CoupleArcLg dans vFile
+	*E:
+	* vector<CoupleArcLg> * vFile : la file de l'algorithme de Dijkstra
+	* CArc * ARCArc : l'arc que l'on veut ajouter
+	* unsigned int uiLongueur : la longueur totale pour aller jusqu'à cet arc
+	*
+	*Necessite :
+	*
+	*S:
+	*
+	*Entraine :(Ajout du couple CoupleArcLg conteant ARCArc et uiLongueur dans vFile) OU (Actualisation de le longueur du couple
+	*CoupleArcLg si il en existe déjà un contenant ARCArc dans vFile)
+	*/
 	void GRAInserer(std::vector<CoupleArcLg> * vFile, CArc * ARCArc, unsigned int uiLongueur);
 };
 
