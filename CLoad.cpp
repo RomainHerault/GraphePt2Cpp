@@ -78,22 +78,18 @@ CGraphe * CLoad::LODParser()
 
 			vector<CSommet> * vListeSommet = pGRAgraphe->GRALireSommets();
 
-			for (unsigned int uiBoucle = 0; uiBoucle < vListeSommet->size(); uiBoucle++    /*CSommet SOMSom : pGRAgraphe->GRALireSommets()*/)
+			for (unsigned int uiBoucle = 0; uiBoucle < vListeSommet->size(); uiBoucle++)
 			{
 				if (vListeSommet->at(uiBoucle).SOMLireNumero() == uiSomDep)
 				{
 					pSOMDep = &vListeSommet->at(uiBoucle);
 				}
-				//else
-				//	throw new CExceptions(OBJECT_DOESNT_EXIST);
-
+				
 
 				if (vListeSommet->at(uiBoucle).SOMLireNumero() == uiSomArr)
 				{
 					pSOMDest = &vListeSommet->at(uiBoucle);
 				}
-				//else
-				//	throw new CExceptions(OBJECT_DOESNT_EXIST);
 			}
 
 			if (pSOMDep == 0 || pSOMDest == 0)
@@ -108,7 +104,7 @@ CGraphe * CLoad::LODParser()
 			delete pARCArc;
 
 		}
-		//cout << pGRAgraphe->GRALireSommets()->at(0).SOMLireArcArrivant()->at(0).ARCLiredest()->SOMLireNumero() << endl;
+		
 	}
 	else
 		throw new CExceptions(BAD_INPUT);
